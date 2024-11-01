@@ -1,6 +1,15 @@
-<p>player-list works!</p>
-<div>
-    @for(player of players; track player.number) {
-        <app-player-card [player]="player"></app-player-card>
-    }
+<div
+  #redTeamList
+  cdkDropList
+  [cdkDropListData]="players"
+  [cdkDropListSortingDisabled]="true"
+>
+  @for(player of players; track player.number) {
+    <app-player-card
+      cdkDrag
+      [player]="player"
+      id="{{player.position}}"
+      (cdkDragStarted)="playerStartDragging($event)">
+    </app-player-card>
+  }
 </div>
