@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CdkDropList, CdkDrag, CdkDragStart } from '@angular/cdk/drag-drop';
+import { CdkDropList, CdkDrag, CdkDragStart, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { RED_TEAM } from '../../../core/constants/red-team';
 import { Player } from '../../../core/types/player.typs';
 import { PlayerCardComponent } from "../player-card/player-card.component";
@@ -26,5 +26,9 @@ export class PlayerListComponent {
 
   playerStartDragging(event: CdkDragStart) {
     this.dragSerice.setDraggeblePlayer(event.source.element);
+  }
+
+  playerDropped(event: CdkDragDrop<Player[]>) {
+    this.dragSerice.playerDropped(event);
   }
 }

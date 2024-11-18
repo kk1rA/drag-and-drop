@@ -1,10 +1,11 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { DragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Player } from '../types/player.typs';
 
 @Injectable({ providedIn: 'root' })
 export class DraggingService {
 
-  currentDraggeblePlayer!: ElementRef;
+  currentDraggeblePlayer!: ElementRef | null;
 
   constructor(
     private readonly dragDrop: DragDrop,
@@ -12,7 +13,25 @@ export class DraggingService {
 
   setDraggeblePlayer(player: ElementRef) {
     this.currentDraggeblePlayer = player;
-    console.log(player)
+  }
+
+  playerDropped(event: CdkDragDrop<Player[]>) {
+    console.log(event)
+    if (event.previousContainer === event.container) {
+      this.clearDragglePlayer();
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+
+  }
+
+  private clearDragglePlayer(): void {
+    this.currentDraggeblePlayer = null;
   }
 
 }

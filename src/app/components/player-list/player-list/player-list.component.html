@@ -3,6 +3,7 @@
   cdkDropList
   [cdkDropListData]="players"
   [cdkDropListSortingDisabled]="true"
+  (cdkDropListDropped)="playerDropped($event)"
 >
   @for(player of players; track player.number) {
     <app-player-card

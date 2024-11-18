@@ -4,3 +4,8 @@ export type Player = {
     number: number;
     position: string;
 }
+
+export enum DropLists {
+    RedTeam = 'redteam',
+    BlueTeam = 'blueteam', 
+}
